@@ -1,0 +1,31 @@
+<loader version="1.0">
+	<application id="SpringSimulation">
+		<name >
+			SpringSimulation
+		</name>
+		<description >
+			
+		</description>
+		<version >
+			1.0.0
+		</version>
+		<vendor >
+			FrozenWired Developer
+		</vendor>
+		<copyright >
+			Copyright (c) 2010 FrozenWired Developer
+		</copyright>
+		<fileset Java="1.49" _blackberryVersion="[5.0.0)">
+			<directory >
+				5.0.0
+			</directory>
+			<files >
+				SpringSimulation.cod
+
+			</files>
+
+		</fileset>
+
+	</application>
+
+</loader>
