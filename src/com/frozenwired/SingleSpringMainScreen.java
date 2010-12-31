@@ -46,21 +46,28 @@ public class SingleSpringMainScreen extends MainScreen implements AnimationListe
 	// spring 1 animation 
 	Spring spring = new Spring(2.5, 5, 0.2, 0, 0);
 	Mass mass = new RectMass(0.5, 50, 50);
-	SpringCanvas canvas = new SpringCanvas(spring, mass, 100, 250);
+	SpringCanvas canvas = new SpringCanvas(spring, mass, 100, 350);
 	SpringAnimation springAnimation = new SpringAnimation(spring, canvas, mass);
 	
 	// spring 2 animation 
-	Spring spring2 = new Spring(2.5, 15, 0.0, 0, 4);
+	Spring spring2 = new Spring(2.5, 15, 0.1, 0, 4);
 	Mass mass2 = new RectMass(0.5, 30, 30);
-	SpringCanvas canvas2 = new SpringCanvas(spring2, mass2, 100, 400);
+	SpringCanvas canvas2 = new SpringCanvas(spring2, mass2, 100, 350);
 	SpringAnimation springAnimation2 = new SpringAnimation(spring2, canvas2, mass2);		
 	
 	// spring 3 animation
 	EncodedImage loveImage = EncodedImage.getEncodedImageResource("res/love.png");
-	Spring spring3 = new Spring(2.5, 5, 0.0, 0, 4);
+	Spring spring3 = new Spring(3, 10, 0.3, 0, 4);
 	Mass mass3 = new ImageMass(1.5, loveImage);
-	SpringCanvas canvas3 = new SpringCanvas(spring3, mass3, 100, 200);
+	SpringCanvas canvas3 = new SpringCanvas(spring3, mass3, 100, 350);
 	SpringAnimation springAnimation3 = new SpringAnimation(spring3, canvas3, mass3);		
+
+	// spring 2 animation 
+	Spring spring4 = new Spring(4, 25, 0.6, 0, 0);
+	Mass mass4 = new RoundMass(10,80);
+	SpringCanvas canvas4 = new SpringCanvas(spring4, mass4, 100, 350);
+	SpringAnimation springAnimation4 = new SpringAnimation(spring4, canvas4, mass4);		
+	
 	
 	CustomGaugeField springConstantField = new CustomGaugeField("Constant",1,30,10,0, SpringRungeKutta.SPRING_CONSTANT_CTX);
 	CustomGaugeField springDampingField = new CustomGaugeField("",0,5,2.5,0, SpringRungeKutta.SPRING_DAMPING_CTX);
@@ -87,10 +94,12 @@ public class SingleSpringMainScreen extends MainScreen implements AnimationListe
 		FlowFieldManager canvasManager = new FlowFieldManager();
 		canvas.addCanvasListener(this);
 		canvas2.addCanvasListener(this);
-		canvas3.addCanvasListener(this);		
+		canvas3.addCanvasListener(this);	
+		canvas4.addCanvasListener(this);
 		canvasManager.add(canvas);
-//		canvasManager.add(canvas2);
-//		canvasManager.add(canvas3);	
+		canvasManager.add(canvas2);
+		canvasManager.add(canvas3);
+		canvasManager.add(canvas4);
 		VerticalFieldManager panelManager = new VerticalFieldManager();
 		
 		CustomGridFieldManager gridManager = new CustomGridFieldManager(2, 0);
@@ -113,7 +122,7 @@ public class SingleSpringMainScreen extends MainScreen implements AnimationListe
 		gravitationField.setChangeListener(springAnimation);
 		gridManager.add(gravitationField);
 		panelManager.add(gridManager);
-		canvasManager.add(panelManager);
+//		canvasManager.add(panelManager);
 		add(canvasManager);
 		
 		add(new SeparatorField());
@@ -122,8 +131,10 @@ public class SingleSpringMainScreen extends MainScreen implements AnimationListe
 		springAnimation.startAnimation();
 		springAnimation2.addAnimationListener(this);
 		springAnimation2.startAnimation();
-//		springAnimation3.addAnimationListener(this);
-//		springAnimation3.startAnimation();		
+		springAnimation3.addAnimationListener(this);
+		springAnimation3.startAnimation();	
+		springAnimation4.addAnimationListener(this);
+		springAnimation4.startAnimation();		
 	}
 
 	protected void makeMenu(Menu menu, int instance)

@@ -260,24 +260,26 @@ public class SpringCanvas extends Field implements Canvas {
 		int y4 = (int)(spring.getLen()*verticalScaleConstant) + ya;
 		System.out.println("SpringCanvas touchEvent");
 		// If click position is in the rectangle mass
-		RectMass rectMass = (RectMass)this.mass;
-		if ((touchX >= xa+(drawAreaWidth/2)-(rectMass.getWidth()/2)) && (touchX <= xa+(drawAreaWidth/2)+(rectMass.getWidth()/2))
-				&& (touchY >= y4) && (touchY <= y4+rectMass.getHeight()))
-		{
-			switch(message.getEvent()) {
-			case TouchEvent.DOWN:
-				this.isClicked = true;
-				System.out.println("TouchEvent.DOWN globalY " + message.getGlobalY(1));
-				for (int i=0;i<listeners.size();i++)
-				{
-					Object obj = listeners.elementAt(i);
-					if (obj instanceof CanvasListener)
+		if (this.mass instanceof RectMass) {
+			RectMass rectMass = (RectMass)this.mass;
+			if ((touchX >= xa+(drawAreaWidth/2)-(rectMass.getWidth()/2)) && (touchX <= xa+(drawAreaWidth/2)+(rectMass.getWidth()/2))
+					&& (touchY >= y4) && (touchY <= y4+rectMass.getHeight()))
+			{
+				switch(message.getEvent()) {
+				case TouchEvent.DOWN:
+					this.isClicked = true;
+					System.out.println("TouchEvent.DOWN globalY " + message.getGlobalY(1));
+					for (int i=0;i<listeners.size();i++)
 					{
-						CanvasListener listener = (CanvasListener)obj;
-						listener.onCanvasTouchDown(this);
-					}
-				}				
-				return true;
+						Object obj = listeners.elementAt(i);
+						if (obj instanceof CanvasListener)
+						{
+							CanvasListener listener = (CanvasListener)obj;
+							listener.onCanvasTouchDown(this);
+						}
+					}				
+					return true;
+				}
 			}
 		}
 		if (this.isClicked)
